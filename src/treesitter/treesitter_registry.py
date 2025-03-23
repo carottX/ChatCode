@@ -1,4 +1,4 @@
-from codeqai.constants import Language
+from constants import Language
 
 
 class TreesitterRegistry:

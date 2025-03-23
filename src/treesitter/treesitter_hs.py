@@ -1,8 +1,8 @@
 import tree_sitter
 
-from codeqai.constants import Language
-from codeqai.treesitter.treesitter import Treesitter, TreesitterMethodNode
-from codeqai.treesitter.treesitter_registry import TreesitterRegistry
+from constants import Language
+from treesitter.treesitter import Treesitter, TreesitterMethodNode
+from treesitter.treesitter_registry import TreesitterRegistry
 
 
 class TreesitterHaskell(Treesitter):

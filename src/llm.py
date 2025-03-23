@@ -25,5 +25,14 @@ class LLM:
         Raises:
             ValueError: If the required environment variable for Azure OpenAI is not set.
         """
-        
-        # print(self.chat_model.invoke("Hello, world!"))
+        self.chat_model = ChatOpenAI(
+                base_url='https://ark.cn-beijing.volces.com/api/v3',
+                # base_url='http://localhost:8000/v1/',
+                api_key='1bdd9cf7-6575-4014-8aa0-f34cd345bdfb',
+                temperature=0.9, max_tokens=4096, 
+                model='ep-20250306193458-zb447',
+                # model = './r1-awq',
+                streaming = True
+        )
+        # ttt = self.chat_model.invoke("Hello, world!")
+        # print(ttt.content, type(ttt.content))

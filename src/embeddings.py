@@ -23,7 +23,7 @@ class Embeddings:
             import sentence_transformers  # noqa: F401
         except ImportError:
             self._install_sentence_transformers()
-
+        EmbeddingsModel.SEN
         if model == EmbeddingsModel.SENTENCETRANSFORMERS_ALL_MPNET_BASE_V2:
             self.embeddings = HuggingFaceEmbeddings()
         elif model == EmbeddingsModel.SENTENCETRANSFORMERS_ALL_MINILM_L6_V2:

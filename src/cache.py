@@ -6,22 +6,19 @@ from typing import Dict
 
 
 class VectorCache:
-    def __init__(self, filename, vector_ids, commit_hash):
+    def __init__(self, filename, vector_ids):
         self.filename = filename
         self.vector_ids = vector_ids
-        self.commit_hash = commit_hash
 
     @classmethod
     def from_json(cls, json_data) -> "VectorCache":
         filename = json_data.get("filename")
         vector_ids = json_data.get("vector_ids", [])
-        commit_hash = json_data.get("commit_hash", "")
-        return cls(filename, vector_ids, commit_hash)
+        return cls(filename, vector_ids)
 
     def to_json(self):
         return {
             "filename": self.filename,
-            "commit_hash": self.commit_hash,
             "vector_ids": self.vector_ids,
         }
 

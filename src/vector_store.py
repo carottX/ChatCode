@@ -69,7 +69,6 @@ class VectorStore:
                     self.vector_cache[document.metadata["filename"]] = VectorCache(
                         document.metadata["filename"],
                         [index_to_docstore_id[i]],
-                        document.metadata["commit_hash"],
                     )
 
         self.retriever = self.db.as_retriever(search_type="mmr", search_kwargs={"k": 8})

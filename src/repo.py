@@ -52,7 +52,7 @@ def find_file_in_git_repo(file_name):
                 return os.path.join(root, file)
 
 
-def load_files():
+def load_files(path):
     """
     Loads files from the current Git repository based on whitelist and blacklist criteria.
 
@@ -62,10 +62,12 @@ def load_files():
     Returns:
         list: A list of file paths that meet the criteria.
     """
-    git_root = get_git_root(os.getcwd())
+    git_root = get_git_root(path)
     file_list = []
 
+    # print(git_root)
     for root, dirs, files in os.walk(git_root):
+        
         if any(blacklist in root for blacklist in BLACKLIST_DIR):
             continue
         for file in files:
@@ -73,7 +75,7 @@ def load_files():
             if any(whitelist == file_ext for whitelist in WHITELIST_FILES):
                 if file not in BLACKLIST_FILES:
                     file_list.append(os.path.join(root, file))
-
+    # print(file_list)
     return file_list
 
 

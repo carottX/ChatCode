@@ -3,8 +3,8 @@ from abc import ABC
 import tree_sitter
 from tree_sitter_languages import get_language, get_parser
 
-from codeqai.constants import Language
-from codeqai.treesitter.treesitter_registry import TreesitterRegistry
+from constants import Language
+from treesitter.treesitter_registry import TreesitterRegistry
 
 
 class TreesitterMethodNode:

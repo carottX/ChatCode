@@ -10,7 +10,7 @@ from constants import Language
 from treesitter.treesitter import Treesitter, TreesitterMethodNode
 
 
-def parse_code_files_for_db(code_files: list[str]) -> list[Document]:
+def parse_code_files_for_db(code_files: list[str], base_path) -> list[Document]:
     """
     Parses a list of code files and returns a list of Document objects for database storage.
 
@@ -23,7 +23,7 @@ def parse_code_files_for_db(code_files: list[str]) -> list[Document]:
     documents = []
     code_splitter = None
     for code_file in code_files:
-        print(code_file)
+        # print(code_file)
         try:
             with open(code_file, "r", encoding="utf-8") as file:
                 file_bytes = file.read().encode()
@@ -48,6 +48,7 @@ def parse_code_files_for_db(code_files: list[str]) -> list[Document]:
                 )
                 for node in treesitterNodes:
                     method_source_code = node.method_source_code
+                    # print()
                     filename = os.path.basename(code_file)
 
                     if node.doc_comment and programming_language != Language.PYTHON:
@@ -61,12 +62,14 @@ def parse_code_files_for_db(code_files: list[str]) -> list[Document]:
                         document = Document(
                             page_content=splitted_document,
                             metadata={
-                                "filename": filename,
+                                "filename": os.path.relpath(code_file, base_path),
                                 "method_name": node.name,
                             },
                         )
+                        # document.metadata
                         documents.append(document)
-        except:
+        except Exception as e:
+            print(f"Error parsing code file: {code_file}, {e}")
             continue
 
     return documents

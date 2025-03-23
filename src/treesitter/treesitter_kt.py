@@ -1,6 +1,6 @@
-from codeqai.constants import Language
-from codeqai.treesitter.treesitter import Treesitter
-from codeqai.treesitter.treesitter_registry import TreesitterRegistry
+from constants import Language
+from treesitter.treesitter import Treesitter
+from treesitter.treesitter_registry import TreesitterRegistry
 
 
 class TreesitterKotlin(Treesitter):

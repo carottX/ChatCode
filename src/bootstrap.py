@@ -4,6 +4,8 @@ from langchain.memory import ConversationSummaryMemory
 from constants import EmbeddingsModel, LlmHost
 from embeddings import Embeddings
 from llm import LLM
+from langchain_core.chat_history import BaseChatMessageHistory
+
 from vector_store import VectorStore
 
 
@@ -41,7 +43,7 @@ def bootstrap(config, repo_name, embeddings_model=None):
         llm=llm.chat_model, memory_key="chat_history", return_messages=True
     )
     qa = ConversationalRetrievalChain.from_llm(
-        llm.chat_model, retriever=vector_store.retriever, memory=memory
+        llm.chat_model, retriever=vector_store.retriever, return_source_documents=True
     )
 
-    return vector_store, memory, qa
+    return vector_store, memory, qa, llm 
