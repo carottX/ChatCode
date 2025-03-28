@@ -5,7 +5,8 @@ import tiktoken
 
 from constants import Language
 from repo import find_file_in_git_repo
-
+import yaml
+import argparse
 
 def get_programming_language(file_extension: str) -> Language:
     """
@@ -131,3 +132,33 @@ def count_tokens(text, model="gpt-4"):
     """
     enc = tiktoken.encoding_for_model(model)
     return len(enc.encode(text))
+
+def load_yaml(path='config.yaml'):
+    with open(path, 'r') as f:
+        return yaml.load(f, Loader=yaml.FullLoader)
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "action",
+        choices=[
+            "local",
+            "webserver",
+        ],
+        help='Action to perform.'
+        + "'chat' to chat with the model, 'configure' to start config wizard, "
+        + "'sync' to sync the vector store with the current git checkout",
+    )
+    parser.add_argument(
+        '--refresh_cache',
+        action='store_true',
+        help="Refresh the cache if set."
+    )
+    parser.add_argument(
+        '--config',
+        type=str,
+        default='config.yaml',
+        help="Path to the configuration file."
+    )
+    return parser.parse_args()

@@ -33,7 +33,7 @@ class VectorStore:
             embeddings=self.embeddings, serialized=index
         )
         self.vector_cache = load_vector_cache(f"{self.name}.json")
-        self.retriever = self.db.as_retriever(search_type="mmr", search_kwargs={"k": 8})
+        self.retriever = self.db.as_retriever(search_type="mmr")
 
     def index_documents(self, documents: list[Document]):
         """
@@ -55,7 +55,7 @@ class VectorStore:
         # Create vector cache
         index_to_docstore_id = self.db.index_to_docstore_id
         for i in range(len(documents)):
-            print('Parsing {:.2f}%'.format((i + 1) / len(documents) * 100), end='\r')
+            print('Parsing {:.2f}%'.format((i + 1) / len(documents) * 100))
             document = self.db.docstore.search(index_to_docstore_id[i])
             if document and isinstance(document, Document):
                 # Check if the document is already present in the vector cache

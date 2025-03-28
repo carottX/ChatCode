@@ -11,7 +11,7 @@ from constants import LlmHost
 
 class LLM:
     def __init__(
-        self, llm_host: LlmHost, chat_model: str, max_tokens=2048, deployment=None
+        self, base_url, api_key, max_tokens, model
     ):
         """
         Initializes the LLM class with the specified parameters.
@@ -26,13 +26,9 @@ class LLM:
             ValueError: If the required environment variable for Azure OpenAI is not set.
         """
         self.chat_model = ChatOpenAI(
-                base_url='https://ark.cn-beijing.volces.com/api/v3',
-                # base_url='http://localhost:8000/v1/',
-                api_key='1bdd9cf7-6575-4014-8aa0-f34cd345bdfb',
-                temperature=0.9, max_tokens=4096, 
-                model='ep-20250306193458-zb447',
-                # model = './r1-awq',
+                base_url=base_url,
+                api_key=api_key,
+                temperature=0.9, max_tokens=max_tokens, 
+                model=model,
                 streaming = True
         )
-        # ttt = self.chat_model.invoke("Hello, world!")
-        # print(ttt.content, type(ttt.content))

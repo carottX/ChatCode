@@ -1,9 +1,7 @@
 import json
 import os
-import platform
 from pathlib import Path
 from typing import Dict
-
 
 class VectorCache:
     def __init__(self, filename, vector_ids):
@@ -81,3 +79,5 @@ def create_cache_dir():
     if not os.path.exists(get_cache_path()):
         path = Path(get_cache_path())
         path.mkdir(parents=True, exist_ok=True)
+
+
